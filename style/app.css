@@ -11,3 +11,7 @@
   box-sizing: border-box;
   font-family: var(--inter);
 }
+
+button {
+  background: aquamarine;
+}
