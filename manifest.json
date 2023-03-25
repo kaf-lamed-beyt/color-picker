@@ -3,13 +3,6 @@
   "version": "1.0",
   "description": "A Chrome extension that lets you know the color codes of a website without opening devtools",
   "manifest_version": 2,
-  "permissions": ["activeTab", "tabs"],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["index.js"]
-    }
-  ],
   "browser_action": {
     "default_title": "Color Picker",
     "default_popup": "index.html",
