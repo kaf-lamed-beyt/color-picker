@@ -16,6 +16,7 @@
 body {
   height: 300px;
   width: 250px;
+  background: var(--primary);
 }
 
 button,
