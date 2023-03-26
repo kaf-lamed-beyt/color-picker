@@ -3,9 +3,14 @@ const modal = document.querySelector(".color-modal");
 const closeButton = document.querySelector("#close");
 
 function createColorModal() {
-  const container = document.querySelector(".color-modal");
+  const modal = `
+    <div class="color-modal">
+      <div class="color-modal-content"></div>
+      <button id="close">Close</button>
+    </div>
+  `;
 
-  document.body.appendChild(container);
+  document.body.insertAdjacentHTML("beforeend", modal);
 }
 
 function getColors() {
@@ -17,48 +22,43 @@ function getColors() {
     const computedStyle = window.getComputedStyle(element);
 
     const color =
-      computedStyle.getPropertyValue("color") &&
-      computedStyle.getPropertyValue("background") &&
-      computedStyle.getPropertyValue("background-color");
+      computedStyle.getPropertyValue("background-color") +
+      "," +
+      computedStyle.getPropertyValue("color") +
+      "," +
+      computedStyle.getPropertyValue("background");
 
-    if (colorArray.includes(color)) continue;
+    if (!color || colorArray.includes(color)) continue;
     colorArray.push(color);
   }
 
   return colorArray;
 }
 
-createColorModal();
-const colors = getColors();
+function renderColors(colors) {
+  const modalContent = document.querySelector(".color-modal-content");
 
-colors.map((item, index) => {
-  console.log(item);
-  const modal = document.querySelector(".color-modal");
+  colors.forEach((item, index) => {
+    console.log(item);
 
-  return (modal.innerHTML += `
-    <div class="color-element" key=${index}>
-      <span class="token" style="--bg: ${item}"></span>
-      <p class="color-code">${item}</p>
-    </div>
-    `);
-});
-
-if (modal) {
-  document.body.appendChild(closeButton);
-  document.body.removeChild(button);
-} else {
-  document.body.removeChild(closeButton);
-  document.body.appendChild(button);
+    return (modalContent.innerHTML += `
+      <div class="color-element" key=${index}>
+        <span class="token" style="--bg: ${item}"></span>
+        <p class="color-code">${item}</p>
+      </div>
+      `);
+  });
 }
 
+createColorModal();
+
 button.addEventListener("click", function () {
-  document.body.appendChild(modal);
-  document.body.appendChild(closeButton);
-  document.body.removeChild(button);
+  const colors = getColor();
+  renderColors(colors);
+
+  modal.style.display = "block";
 });
 
 closeButton.addEventListener("click", function () {
-  document.body.removeChild(modal);
-  document.body.removeChild(closeButton);
-  document.body.appendChild(button);
+  modal.style.display = "none";
 });

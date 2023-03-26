@@ -13,6 +13,11 @@
   font-family: var(--inter);
 }
 
+body {
+  height: 300px;
+  width: 250px;
+}
+
 button,
 .close {
   position: absolute;
@@ -27,7 +32,7 @@ button,
   top: 20px;
   right: 20px;
   width: 200px;
-  height: 32%;
+  height: 200px;
   border-radius: 4px;
   background: var(--primary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
