@@ -1,6 +1,16 @@
-const button = document.querySelector("#get-colors");
 const modal = document.querySelector(".color-modal");
 const closeButton = document.querySelector("#close");
+
+function renderColors(colors) {
+  colors.forEach((item, index) => {
+    return (modal.innerHTML += `
+      <div class="color-element" key=${index}>
+        <span class="token" style="--bg: ${item}"></span>
+        <p class="color-code">${item}</p>
+      </div>
+      `);
+  });
+}
 
 function getColors() {
   const elements = document.getElementsByTagName("*");
@@ -10,10 +20,7 @@ function getColors() {
     const element = elements[i];
     const computedStyle = window.getComputedStyle(element);
 
-    const color =
-      computedStyle.getPropertyValue("background-color") ||
-      computedStyle.getPropertyValue("background") ||
-      computedStyle.getPropertyValue("color");
+    const color = computedStyle.getPropertyValue("background");
 
     if (colorArray.includes(color)) continue;
     colorArray.push(color);
@@ -22,34 +29,17 @@ function getColors() {
   return colorArray;
 }
 
-function renderColors(colors) {
-  const modalContent = document.querySelector(".color-modal");
-
-  colors.forEach((item, index) => {
-    return (modalContent.innerHTML += `
-      <div class="color-element" key=${index}>
-        <span class="token" style="--bg: ${item}"></span>
-        <p class="color-code">${item}</p>
-      </div>
-      `);
-  });
-}
+modal.style.color = "#fff";
 
 const colors = getColors();
+
+modal.textContent = colors;
+
 renderColors(colors);
-
-if (modal) {
-  document.body.removeChild(button);
-}
-
-button.addEventListener("click", function () {
-  document.body.appendChild(modal);
-  document.body.removeChild(button);
-  document.body.appendChild(closeButton);
-});
 
 closeButton.addEventListener("click", function () {
   document.body.removeChild(modal);
   document.body.removeChild(closeButton);
-  document.body.appendChild(button);
 });
+
+document.body.style.backgroundColor = "orange";
