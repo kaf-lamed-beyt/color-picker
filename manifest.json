@@ -8,15 +8,7 @@
     "default_popup": "index.html",
     "default_icon": "icon.png"
   },
-  "host_permissions": ["<all_urls>"],
   "permissions": ["scripting", "activeTab", "tabs"],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "runAt": "document_end",
-      "js": ["index.js"]
-    }
-  ],
   "background": {
     "service_worker": "popup.js"
   }
